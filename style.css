@@ -1,0 +1,35 @@
+body{
+    margin: 0;
+    background-color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', Arial, Helvetica, sans-serif;
+    color: goldenrod;
+    text-align: center;
+}
+
+h1{
+    font-size: 60px;
+}
+
+#message-el{
+  font-size:30px;
+  border: white solid 1px;
+  padding: 10px 0px;
+}
+
+P{
+    color: white;
+    font-size: 40px;
+    margin: 15px;
+}
+
+#total{
+  padding-top:20px;
+  text-decoration:underline;
+}
+
+button{
+    background-color: goldenrod;
+    font-size: 25px;
+    padding: 2px 20px;
+
+}
