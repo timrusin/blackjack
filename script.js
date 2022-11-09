@@ -1,8 +1,11 @@
 let playerCards = [];
+let dealerCards = [];
 let isPlaying = false;
-let messageEl = document.getElementById("message-el");
-let sumEl = document.getElementById("sum-el");
-let cardsEl = document.getElementById("cards-el");
+let messageEl = document.getElementById("message");
+let sumEl = document.getElementById("sum");
+let dealerSumEl = document.getElementById("dealer-sum")
+let cardsEl = document.getElementById("player-cards");
+let dealerCardsEl = document.getElementById("dealer-cards")
 const deal = document.getElementById("deal");
 deal.addEventListener("click", dealCards);
 const hit = document.getElementById("hit");
@@ -52,7 +55,22 @@ function standFunction() {
     hit.disabled = true;
     stand.disabled = true;
     messageEl.textContent = "Dealer drawing cads";
+    dealerDraws()
 
+}
+
+function dealerDraws() {
+    let dealerFirstCard = getRandomCard()
+    let dealerSecondCard = getRandomCard();
+    dealerCards = [dealerFirstCard, dealerSecondCard];
+    dealerSum = dealerFirstCard + dealerSecondCard;
+    dealerCardsEl.textContent += dealerCards;
+    dealerSumEl.textContent += dealerSum
+    dealerMove()
+}
+
+function dealerMove(){
+    console.log(dealerSum);
 }
 
 function checkSum() {
