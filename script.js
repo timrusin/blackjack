@@ -9,9 +9,16 @@ const deal = document.getElementById("deal");
 deal.addEventListener("click", dealCards);
 const hit = document.getElementById("hit");
 hit.addEventListener("click", drawCard);
+const stand = document.getElementById("stand");
+stand.addEventListener("click", standFunction);
+hit.disabled = true;
+stand.disabled = true;
+
+
 
 function dealCards() {
-  isPlaying = true
+  hit.disabled = false;
+  stand.disabled = false;
   console.log(isPlaying);
   cardsEl.textContent = "Cards: ";
   let firstCard = getRandomCard();
@@ -29,7 +36,7 @@ function drawCard() {
   cardsEl.textContent += "," + newCard;
   sum = parseInt(sumEl.textContent) + newCard;
   sumEl.textContent = sum;
-  checkCards();
+  checkCards()
 }
 
 function getRandomCard() {
@@ -43,6 +50,10 @@ function getRandomCard() {
   }
 }
 
+function standFunction() {
+    hit.disabled = true
+}
+
 function checkCards() {
   let sum = parseInt(sumEl.textContent);
   if (sum <= 20) {
@@ -50,8 +61,10 @@ function checkCards() {
   } else if (sum === 21) {
     messageEl.textContent = "You got Blackjack! Winner!";
     deal.disabled = false;
+    isPlaying = false
   } else {
     messageEl.textContent = "You're out of the game";
     deal.disabled = false;
+    isPlaying = false;
   }
 }
