@@ -21,6 +21,7 @@ function dealCards() {
   cardsEl.textContent += cards;
   sumEl.textContent = sum;
   checkCards();
+  deal.disabled = true
 }
 
 function drawCard() {
@@ -48,10 +49,9 @@ function checkCards() {
     messageEl.textContent = "Would you like to HIT for another card or STAND?";
   } else if (sum === 21) {
     messageEl.textContent = "You got Blackjack! Winner!";
-    hasBlackjack = true;
+    deal.disabled = false;
   } else {
     messageEl.textContent = "You're out of the game";
-    isPlaying = false;
-    console.log(isPlaying);
+    deal.disabled = false;
   }
 }
