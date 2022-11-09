@@ -1,12 +1,18 @@
 let cards = [];
 let sum = 0;
+let hasBlackjack = false
+let isPlaying = false
 let messageEl = document.getElementById("message-el");
 let sumEl = document.getElementById("sum-el");
 let cardsEl = document.getElementById("cards-el");
-document.getElementById("deal").onclick = deal;
-const hit = document.getElementById("hit").onclick = drawCard;
+const deal = document.getElementById("deal");
+deal.addEventListener("click", dealCards);
+const hit = document.getElementById("hit");
+hit.addEventListener("click", drawCard);
 
-function deal() {
+function dealCards() {
+  isPlaying = true
+  console.log(isPlaying);
   cardsEl.textContent = "Cards: ";
   let firstCard = getRandomCard();
   let secondCard = getRandomCard();
@@ -46,5 +52,6 @@ function checkCards() {
   } else {
     messageEl.textContent = "You're out of the game";
     isPlaying = false;
+    console.log(isPlaying);
   }
 }
