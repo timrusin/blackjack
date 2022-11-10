@@ -33,10 +33,27 @@ function dealCards() {
     sumEl.textContent = sum;
       if (sum == 21){
       deal.disabled = false
-      } else {deal.disabled = true}
+    } else {deal.disabled = true}
     checkSum();   
-}
-
+  }
+  
+  function checkSum() {
+    let sum = parseInt(sumEl.textContent);
+    if (sum === 21) {
+      messageEl.textContent = "You got Blackjack! Winner!";
+      deal.disabled = false;
+      hit.disabled = true;
+      stand.disabled = true;
+    } else if (sum <21) {
+      messageEl.textContent = "HIT for another card or STAND?";
+    } else {
+      messageEl.textContent = "You busted, better luck next time";
+      deal.disabled = false;
+      hit.disabled = true;
+      stand.disabled = true;
+    }
+  }
+  
 function drawCard() {
   let newCard = getRandomCard();
   cardsEl.textContent += "," + newCard;
@@ -57,10 +74,10 @@ function getRandomCard() {
 }
 
 function standFunction() {
-    hit.disabled = true;
-    stand.disabled = true;
-    messageEl.textContent = "Dealer drawing cads";
-    dealerDraws()
+  hit.disabled = true;
+  stand.disabled = true;
+  messageEl.textContent = "Dealer drawing cads";
+  dealerDraws()
 }
 
 function dealerDraws() {
@@ -70,7 +87,14 @@ function dealerDraws() {
     dealerSum = dealerFirstCard + dealerSecondCard;
     dealerCardsEl.textContent = dealerCards;
     dealerSumEl.textContent += dealerSum
-    dealerMove()
+      if (dealerSum == sum){
+        messageEl.textContent = "You win";
+        deal.disabled = false
+      } else if (dealerSum > sum){
+        messageEl.textContent = "Dealer wins, better luck next time";
+        deal.disabled = false
+      } else {dealerMove()}
+    
 }
 
 function dealerMove(){
@@ -90,22 +114,5 @@ function dealerMove(){
         }
         },2000);
     
-}
-
-function checkSum() {
-  let sum = parseInt(sumEl.textContent);
-  if (sum === 21) {
-    messageEl.textContent = "You got Blackjack! Winner!";
-    deal.disabled = false;
-    hit.disabled = true;
-    stand.disabled = true;
-  } else if (sum <21) {
-    messageEl.textContent = "HIT for another card or STAND?";
-  } else {
-    messageEl.textContent = "You busted, better luck next time";
-    deal.disabled = false;
-    hit.disabled = true;
-    stand.disabled = true;
-  }
 }
 
