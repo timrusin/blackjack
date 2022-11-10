@@ -19,25 +19,22 @@ stand.addEventListener("click", standFunction);
 hit.disabled = true;
 stand.disabled = true;
 
-
 function dealCards() {
     dealerCards = []
     dealerCardsEl.textContent = ''
     dealerSumEl.textContent = ''
     hit.disabled = false;
     stand.disabled = false;
-    cardsEl.textContent = "Cards: ";
     let firstCard = getRandomCard();
     let secondCard = getRandomCard();
     playerCards = [firstCard, secondCard];
     sum = firstCard + secondCard;
-    cardsEl.textContent += playerCards;
+    cardsEl.textContent = playerCards;
     sumEl.textContent = sum;
-    if (sum == 21){
-     deal.disabled = false
-    } else {deal.disabled = true}
-    checkSum();
-      
+      if (sum == 21){
+      deal.disabled = false
+      } else {deal.disabled = true}
+    checkSum();   
 }
 
 function drawCard() {
@@ -77,19 +74,22 @@ function dealerDraws() {
 }
 
 function dealerMove(){
-    while (dealerSum<=sum){
+        const dealerDrawing = setInterval(()=> {
         dealerCards.push(getRandomCard())
         dealerCardsEl.textContent = dealerCards;
         dealerSum = dealerCards.reduce((a,b)=>a+b)
         dealerSumEl.textContent = dealerSum
-    }
-    if (dealerSum>21){
-        messageEl.textContent = "Dealer busts. You Win!";
-        deal.disabled = false
-    } else if (dealerSum>=sum && dealerSum<22){
-        messageEl.textContent = "Dealer wins, better luck next time";
-        deal.disabled = false;
-    }
+        if (dealerSum>21){
+            clearInterval(dealerDrawing)
+            messageEl.textContent = "Dealer busts. You Win!";
+            deal.disabled = false
+        } else if (dealerSum>=sum && dealerSum<22){
+            clearInterval(dealerDrawing)
+            messageEl.textContent = "Dealer wins, better luck next time";
+            deal.disabled = false;
+        }
+        },2000);
+    
 }
 
 function checkSum() {
