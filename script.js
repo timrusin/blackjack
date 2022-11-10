@@ -98,9 +98,9 @@ function checkSum() {
     hit.disabled = true;
     stand.disabled = true;
   } else if (sum <21) {
-    messageEl.textContent = "Would you like to HIT for another card or STAND?";
+    messageEl.textContent = "HIT for another card or STAND?";
   } else {
-    messageEl.textContent = "You're out of the game";
+    messageEl.textContent = "You busted, better luck next time";
     deal.disabled = false;
     hit.disabled = true;
     stand.disabled = true;
