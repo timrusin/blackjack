@@ -33,8 +33,11 @@ function dealCards() {
     sum = firstCard + secondCard;
     cardsEl.textContent += playerCards;
     sumEl.textContent = sum;
+    if (sum == 21){
+     deal.disabled = false
+    } else {deal.disabled = true}
     checkSum();
-    deal.disabled = true
+      
 }
 
 function drawCard() {
@@ -77,7 +80,6 @@ function dealerMove(){
     while (dealerSum<=sum){
         dealerCards.push(getRandomCard())
         dealerCardsEl.textContent = dealerCards;
-        console.log(dealerCards);
         dealerSum = dealerCards.reduce((a,b)=>a+b)
         dealerSumEl.textContent = dealerSum
     }
