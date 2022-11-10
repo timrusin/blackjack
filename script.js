@@ -1,5 +1,7 @@
 let playerCards = [];
 let dealerCards = [];
+let sum = 0;
+let dealerSum = 0;
 let isPlaying = false;
 let messageEl = document.getElementById("message");
 let sumEl = document.getElementById("sum");
@@ -19,6 +21,9 @@ stand.disabled = true;
 
 
 function dealCards() {
+    dealerCards = []
+    dealerCardsEl.textContent = ''
+    dealerSumEl.textContent = ''
     hit.disabled = false;
     stand.disabled = false;
     cardsEl.textContent = "Cards: ";
@@ -56,7 +61,6 @@ function standFunction() {
     stand.disabled = true;
     messageEl.textContent = "Dealer drawing cads";
     dealerDraws()
-
 }
 
 function dealerDraws() {
@@ -64,24 +68,37 @@ function dealerDraws() {
     let dealerSecondCard = getRandomCard();
     dealerCards = [dealerFirstCard, dealerSecondCard];
     dealerSum = dealerFirstCard + dealerSecondCard;
-    dealerCardsEl.textContent += dealerCards;
+    dealerCardsEl.textContent = dealerCards;
     dealerSumEl.textContent += dealerSum
     dealerMove()
 }
 
 function dealerMove(){
-    console.log(dealerSum);
+    while (dealerSum<=sum){
+        dealerCards.push(getRandomCard())
+        dealerCardsEl.textContent = dealerCards;
+        console.log(dealerCards);
+        dealerSum = dealerCards.reduce((a,b)=>a+b)
+        dealerSumEl.textContent = dealerSum
+    }
+    if (dealerSum>21){
+        messageEl.textContent = "Dealer busts. You Win!";
+        deal.disabled = false
+    } else if (dealerSum>=sum && dealerSum<22){
+        messageEl.textContent = "Dealer wins, better luck next time";
+        deal.disabled = false;
+    }
 }
 
 function checkSum() {
   let sum = parseInt(sumEl.textContent);
-  if (sum <= 20) {
-    messageEl.textContent = "Would you like to HIT for another card or STAND?";
-  } else if (sum === 21) {
+  if (sum === 21) {
     messageEl.textContent = "You got Blackjack! Winner!";
     deal.disabled = false;
     hit.disabled = true;
     stand.disabled = true;
+  } else if (sum <21) {
+    messageEl.textContent = "Would you like to HIT for another card or STAND?";
   } else {
     messageEl.textContent = "You're out of the game";
     deal.disabled = false;
